@@ -14,9 +14,10 @@ public class Parser {
 		System.exit(0);
 	}
 	
+ 
 	public static void parse() {
 		token = lexer.nextToken();
-		//System.out.println(" THIS IS A NEW GUY --> "+ token.code + " " + token.data);
+		 // System.out.println(" THIS IS A NEW GUY --> "+ token.code + " " + token.data);
 		// if the nextToken has TokenCode ERROR
 		if(token.code == Token.TokenCode.ERROR) {
 			ParserError();
@@ -31,7 +32,7 @@ public class Parser {
 		if(token.code == Token.TokenCode.SEMICOL) {
 			token = lexer.nextToken();
 			//System.out.println("printing semicol");
-			//parse();
+			parse();
 		}
 		else {
 			Statement();
@@ -55,14 +56,13 @@ public class Parser {
 		if(token.code == Token.TokenCode.ID) {
 			//Factor();
 			Expr();
-			//token = nextToken();
+			token = lexer.nextToken();
 			if(token.code == Token.TokenCode.ASSIGN) {
 				token = lexer.nextToken();
 				Expr();
 				System.out.println("ASSIGN");
-				//System.out.println("ASSIGN " +  token.code + " "+token.data);
-				token = lexer.nextToken();
-				//System.out.println("ASSIGN++ " + " " + token.code  + " "+ token.data);
+				//System.out.println(token.code + token.data);
+				// token = lexer.nextToken();
 			}
 			else {
 				// handle var INT ....
@@ -91,7 +91,7 @@ public class Parser {
 			// do stuff with plus
 			token = lexer.nextToken();
 			Expr();
-			System.out.println("ADD");
+			System.out.println("A");
 		}
 		if(token.code == Token.TokenCode.MINUS) {
 			// System.out.println("before sub" + " " + token.data); ************
@@ -111,13 +111,13 @@ public class Parser {
 		// System.out.println("im inside before FActor...." + token.data);
 		Factor();
 		
-		//token = nextToken();
-		//System.out.println("This inside Term  and  is: " + token.data);
+		//token = lexer.nextToken();
+		 //System.out.println("This inside Term  and my T is: " + token.data);
 		
 		if(token.code == Token.TokenCode.MULT){
 			//System.out.println("before mult " + token.data);
 			token = lexer.nextToken();
-			//System.out.println("after mult " + token.data);
+		//	System.out.println("after mult " + token.data);
 			Term();
 			//Factor();
 			//System.out.println("after factor " + token.data);
@@ -138,8 +138,8 @@ public class Parser {
 		}
 		if(token.code == Token.TokenCode.ID) {
 			//do stuff with ID
+			//System.out.println("PUSH " + token.data); ********************************+
 			System.out.println("PUSH " + token.data);
-			token = lexer.nextToken();
 		}
 		if(token.code == Token.TokenCode.LPAREN) {
 			// switch to next token
@@ -157,11 +157,5 @@ public class Parser {
 				ParserError();
 			}
 		}
-	}
-	
-	public static void main(String[] args){
- 
-		parse();
-		
 	}
 }
